@@ -17,12 +17,51 @@ h1{
     font-family: "Lucida Console", "Courier New", monospace;
     font-size: 50px;
     font-weight: bold;
+    text-shadow: 2px 2px 5px red;
 
 }
 
 body {
     background-color: rgb(216, 216, 216);
 }
+
+li, a, button {
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 30px 10%;
+}
+
+.nav_links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav_links li a:hover {
+    color: #0088a9
+}
+
+button {
+    padding: 9px 25px;
+    background-color: rgba(0,136,169,1);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+
+
+}
+
+button:hover {
+    background-color: rgba(0,136,169,0.8);
+
+
+}
+
 ul {
     list-style-type: none;
     margin: 0;
