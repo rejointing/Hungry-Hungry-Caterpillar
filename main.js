@@ -1,10 +1,6 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
-function clearScreen(){
-ctx.fillStyle = "black";
-ctx.fillRect(0,0,canvas.width,canvas.height);
-}
 
 let speed = 7;
 
@@ -25,11 +21,17 @@ let yVelocity = 0;
 function drawGame(){
     changeSnakeLocation();
     checkBaitCollision();
-    drawBait();
     clearScreen();
     makeSnake();
+    makeBait();
     setTimeout(drawGame, 1000/ speed);
 }
+
+function clearScreen(){
+    ctx.fillStyle = "black";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    }
+
 
 function makeSnake(){
     ctx.fillStyle = 'blue';
@@ -43,9 +45,9 @@ function changeSnakeLocation(){
 
 //bait: 
 
-function drawBait(){
-    ctx.fillStyle = "orange";
-    ctx.fillRect(baitX * tileCount, baitY * tileCount, tileSize, tileSize)
+function makeBait(){
+    ctx.fillStyle = "white";
+    ctx.fillRect(baitX, baitY, tileSize, tileSize);
 }
 
 function checkBaitCollision(){
@@ -96,7 +98,7 @@ function keyDown(event){
 }
 
 drawGame();
-
+makeBait();
 // audio
 // collision detection
 // keyboard input
