@@ -24,7 +24,7 @@ let yVelocity = 0;
 
 function drawGame(){
     changeSnakeLocation();
-    checkBaitBite();
+    checkBaitCollision();
     drawBait();
     clearScreen();
     makeSnake();
@@ -41,16 +41,19 @@ function changeSnakeLocation(){
     snakeHeadY = snakeHeadY + yVelocity;
 }
 
-// bait:
+//bait: 
+
 function drawBait(){
-    ctx.fillStyle = 'orange';
-    ctx.fillRect(baitX * tileCount, baitY * tileCount, tileSize, tileSize);
+    ctx.fillStyle = "orange";
+    ctx.fillRect(baitX * tileCount, baitY * tileCount, tileSize, tileSize)
 }
 
-function checkBaitBite(){
+function checkBaitCollision(){
     if(baitX === snakeHeadX && baitY === snakeHeadY){
         baitX = Math.floor(Math.random() * tileCount);
         baitY = Math.floor(Math.random() * tileCount);
+        tailLength++;
+        score++;
     }
 }
 
