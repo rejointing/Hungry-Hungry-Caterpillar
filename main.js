@@ -23,6 +23,7 @@ let baitY = 5;
 let xVelocity = 0;
 let yVelocity = 0;
 
+let score = 0;
 
 // Game loop:
 
@@ -32,7 +33,17 @@ function drawGame(){
     checkBaitCollision();
     makeSnake();
     makeBait();
+
+    trackScore();
+
     setTimeout(drawGame, 1000/ speed);
+}
+
+function trackScore(){
+    ctx.fillStyle = "white";
+    ctx.font = "10px Verdana"
+    ctx.fillText("Score " + score, canvas.width-50, 10);
+
 }
 
 function clearScreen(){
@@ -42,19 +53,21 @@ function clearScreen(){
 
 
 function makeSnake(){
-    ctx.fillStyle = 'blue';
-    ctx.fillRect(snakeHeadX*tileCount, snakeHeadY*tileCount, tileSize,tileSize);
 
-    ctx.fillStyle = 'green';
+    ctx.fillStyle = 'purple';
     for(let i = 0; i < snakeBits.length; i++){
         let bit = snakeBits[i];
         ctx.fillRect(bit.x * tileCount, bit.y * tileCount, tileSize, tileSize);
     }
 
-    snakeBits.push(new snakeBit(headX, headY)); //put an item at the end of the list next to the head
-    if(snakeBits.length > tailLength){
-        snakeBits.shift(); // remove the furthest item from the snakeBits if you have more than the tail size
+    snakeBits.push(new snakeBit(snakeHeadX, snakeHeadY)); //put an item at the end of the list next to the head
+    while (snakeBits.length > tailLength){
+        snakeBits.shift(); // remove the furthest item from the snakeBits if you have more than the tail si
     }
+
+    ctx.fillStyle = 'blue';
+    ctx.fillRect(snakeHeadX*tileCount, snakeHeadY*tileCount, tileSize,tileSize);
+
 
 }
 
@@ -75,6 +88,7 @@ function checkBaitCollision(){
         baitX = Math.floor(Math.random() * tileCount);
         baitY = Math.floor(Math.random() * tileCount);
         tailLength++;
+        score++;
     }
 }
 
