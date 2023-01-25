@@ -1,6 +1,12 @@
 const canvas = document.getElementById("myCanvas");
 const ctx = canvas.getContext("2d");
 
+class snakeBit{
+    constructor(x,y){
+        this.x = x;
+        this.y = y;
+    }
+}
 
 let speed = 7;
 
@@ -8,6 +14,8 @@ let tileCount = 20;
 let tileSize = canvas.width / tileCount - 2;
 let snakeHeadX = 10;
 let snakeHeadY = 10;
+const snakeBits = [];
+let tailLength = 2;
 
 let baitX = 5;
 let baitY = 5;
@@ -19,9 +27,9 @@ let yVelocity = 0;
 // Game loop:
 
 function drawGame(){
+    clearScreen();
     changeSnakeLocation();
     checkBaitCollision();
-    clearScreen();
     makeSnake();
     makeBait();
     setTimeout(drawGame, 1000/ speed);
@@ -35,7 +43,19 @@ function clearScreen(){
 
 function makeSnake(){
     ctx.fillStyle = 'blue';
-    ctx.fillRect(snakeHeadX*tileCount, snakeHeadY*tileCount, tileSize,tileSize)
+    ctx.fillRect(snakeHeadX*tileCount, snakeHeadY*tileCount, tileSize,tileSize);
+
+    ctx.fillStyle = 'green';
+    for(let i = 0; i < snakeBits.length; i++){
+        let bit = snakeBits[i];
+        ctx.fillRect(bit.x * tileCount, bit.y * tileCount, tileSize, tileSize);
+    }
+
+    snakeBits.push(new snakeBit(headX, headY)); //put an item at the end of the list next to the head
+    if(snakeBits.length > tailLength){
+        snakeBits.shift(); // remove the furthest item from the snakeBits if you have more than the tail size
+    }
+
 }
 
 function changeSnakeLocation(){
@@ -47,7 +67,7 @@ function changeSnakeLocation(){
 
 function makeBait(){
     ctx.fillStyle = "white";
-    ctx.fillRect(baitX, baitY, tileSize, tileSize);
+    ctx.fillRect(baitX * tileCount, baitY * tileCount, tileSize, tileSize);
 }
 
 function checkBaitCollision(){
@@ -55,7 +75,6 @@ function checkBaitCollision(){
         baitX = Math.floor(Math.random() * tileCount);
         baitY = Math.floor(Math.random() * tileCount);
         tailLength++;
-        score++;
     }
 }
 
@@ -98,7 +117,6 @@ function keyDown(event){
 }
 
 drawGame();
-makeBait();
 // audio
 // collision detection
 // keyboard input
