@@ -42,26 +42,58 @@ function drawGame(){
 
     trackScore();
 
+    if(score>2){
+        speed = 10;
+    }
+
+    if (score > 6){
+        speed = 13;
+    }
+
+    if (score > 15){
+        speed = 15;
+    }
+
     setTimeout(drawGame, 1000/ speed);
 }
 
 function checkGameFailure(){
     let gameFailure = false;
 
+    if (xVelocity === 0 && yVelocity === 0){
+        return false;
+    }
+
     //walls
     if (snakeHeadX < 0 ){
         gameFailure = true;
     }
 
-    if (snakeHeadX >= tileCount){
+   else if (snakeHeadX >= tileCount){
         gameFailure = true;
     }
+
+else if (snakeHeadY < 0){
+    gameFailure = true;
+}
+
+else if (snakeHeadY >= tileCount){
+    gameFailure = true;
+}
+
+for (let i = 0; i < snakeBits.length; i++){
+    let bit = snakeBits[i];
+    if (bit.x === snakeHeadX && bit.y === snakeHeadY){
+        gameFailure = true;
+        break;
+    }
+}
 
 
 
     if (gameFailure){
         ctx.fillStyle = "white";
-        ctx.font = "50px Verdana";
+        ctx.font = "50px Courier New"
         ctx.fillText("GAME OVER!", canvas.width / 6.5, canvas.height / 2);
     }
 
@@ -71,7 +103,7 @@ function checkGameFailure(){
 
 function trackScore(){
     ctx.fillStyle = "white";
-    ctx.font = "10px Verdana"
+    ctx.font = "12px Courier New"
     ctx.fillText("Score " + score, canvas.width-50, 10);
 
 }
