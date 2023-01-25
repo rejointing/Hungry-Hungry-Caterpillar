@@ -28,8 +28,14 @@ let score = 0;
 // Game loop:
 
 function drawGame(){
-    clearScreen();
     changeSnakeLocation();
+    let result = checkGameFailure();
+    if(result){
+        return;
+    }
+
+    clearScreen();
+    
     checkBaitCollision();
     makeSnake();
     makeBait();
@@ -37,6 +43,30 @@ function drawGame(){
     trackScore();
 
     setTimeout(drawGame, 1000/ speed);
+}
+
+function checkGameFailure(){
+    let gameFailure = false;
+
+    //walls
+    if (snakeHeadX < 0 ){
+        gameFailure = true;
+    }
+
+    if (snakeHeadX >= tileCount){
+        gameFailure = true;
+    }
+
+
+
+    if (gameFailure){
+        ctx.fillStyle = "white";
+        ctx.font = "50px Verdana";
+        ctx.fillText("GAME OVER!", canvas.width / 6.5, canvas.height / 2);
+    }
+
+    return gameFailure;
+
 }
 
 function trackScore(){
