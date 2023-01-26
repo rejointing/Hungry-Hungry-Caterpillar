@@ -103,7 +103,7 @@ for (let i = 0; i < snakeBits.length; i++){
 
 function trackScore(){
     ctx.fillStyle = "white";
-    ctx.font = "12px Courier New"
+    ctx.font = "10px Courier New"
     ctx.fillText("Score " + score, canvas.width-50, 10);
 
 }
