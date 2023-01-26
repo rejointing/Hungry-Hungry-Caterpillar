@@ -92,7 +92,7 @@ for (let i = 0; i < snakeBits.length; i++){
 
 
     if (gameFailure){
-        ctx.fillStyle = "white";
+        ctx.fillStyle = "yellow";
         ctx.font = "50px Courier New"
         ctx.fillText("GAME OVER!", canvas.width / 6.5, canvas.height / 2);
     }
@@ -141,7 +141,7 @@ function changeSnakeLocation(){
 //bait: 
 
 function makeBait(){
-    ctx.fillStyle = "white";
+    ctx.fillStyle = "green";
     ctx.fillRect(baitX * tileCount, baitY * tileCount, tileSize, tileSize);
 }
 
